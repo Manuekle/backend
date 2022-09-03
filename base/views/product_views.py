@@ -1,11 +1,10 @@
-from django.shortcuts import render
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+# from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from base.models import Product, Review, Categories
+from base.models import Product, Review
 from base.serializers import ProductSerializer
 
 from rest_framework import status
@@ -19,35 +18,19 @@ def getProducts(request):
 
     products = Product.objects.filter(
         name__icontains=query).order_by('-createdAt')
-    
+
     # filter category by products
     category = request.query_params.get('category')
     if category != None:
         products = products.filter(category=category)
-        
+
     # filter editorial by products
     editorial = request.query_params.get('editorial')
     if editorial != None:
         products = products.filter(editorial=editorial)
-
-    page = request.query_params.get('page')
-    paginator = Paginator(products, 8)
-        
-
-    try:
-        products = paginator.page(page)
-    except PageNotAnInteger:
-        products = paginator.page(1)
-    except EmptyPage:
-        products = paginator.page(paginator.num_pages)
-
-    if page == None:
-        page = 1
-
-    page = int(page)
-    print('Page:', page)
+    
     serializer = ProductSerializer(products, many=True)
-    return Response({'products': serializer.data, 'page': page, 'pages': paginator.num_pages, 'category': serializer.data, 'editorial': serializer.data})
+    return Response({'products': serializer.data, 'category': serializer.data, 'editorial': serializer.data})
 
 
 @api_view(['GET'])
@@ -63,11 +46,13 @@ def getProduct(request, pk):
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def getProductByCategory(request, pk):
     products = Product.objects.filter(category=pk).order_by('-createdAt')
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
+
 
 @api_view(['GET'])
 def getProductByEditorial(request, pk):

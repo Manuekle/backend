@@ -26,7 +26,7 @@ SECRET_KEY = 'sc%oco$+(3$z$at=z4j)#l-+ym)+_b11389mdt2^12m$bf63%@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '4eaf-190-249-38-169.ngrok.io']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -139,16 +139,16 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # }
 
 # Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+# https: // docs.djangoproject.com/en/3.1/ref/settings/  # databases
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'manganiacos',
-       'USER': 'postgres',
-       'PASSWORD': 'knEQC15CCDQ1xNeE7TAY',
-       'HOST': 'dbmanganiacos.cn2nsfxq6hjk.us-east-1.rds.amazonaws.com',
-       'PORT': '5432'
-   }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'manganiacos',
+        'USER': 'postgres',
+        'PASSWORD': 'knEQC15CCDQ1xNeE7TAY',
+        'HOST': 'dbmanganiacos.cn2nsfxq6hjk.us-east-1.rds.amazonaws.com',
+        'PORT': '5432'
+    }
 }
 
 
@@ -174,7 +174,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'es-mx'
+LANGUAGE_CODE = 'es-co'
 
 TIME_ZONE = 'UTC'
 
@@ -187,7 +187,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
 
 
 STATICFILES_DIRS = [
@@ -239,7 +238,5 @@ EMAIL_HOST_USER = 'senprot.project@gmail.com'
 EMAIL_HOST_PASSWORD = 'senprot2021'
 
 
-
 if os.getcwd() == '/app':
     DEBUG = False
- 
